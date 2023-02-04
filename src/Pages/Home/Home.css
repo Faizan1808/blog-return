@@ -47,12 +47,12 @@
 .image1{
     border-radius: 20px;
     margin-left: 10px;
-    width: 45rem;
+    width: 40rem;
 }
 
 .image2{
-    height: 12.5rem;
-    width: 23rem;
+    height: 14.5rem;
+    width: 27rem;
     border-radius: 20px;
 }
 
@@ -64,6 +64,9 @@
 }
 
 /* Latest content */
+.latestcontent{
+    display: flex;
+}
 
 .latestcontentimg{
     width: 351px;
@@ -117,7 +120,7 @@
 
 .ArticleContent{
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
 }
 
 .ArticleContent-row{

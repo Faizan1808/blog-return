@@ -1,32 +1,14 @@
 import '../../CSS/page.css'
 import { useNavigate } from "react-router-dom"
-import { Posts } from '../Home/HomeContent'
+import { Post } from "../Home/Home"
 import image from '../../image/moun.jpg'
 import Navbar from '../../Components/Navbar/Navbar'
 import Logo from '../../Components/Logo/logo'
-import { useState, useEffect } from 'react'
-
+import { FitnessData } from "./Data"
 
 
 function Fitness(){
-    
-    const [data, setData] = useState([])
-
-    const fetchData = () =>{
-        return fetch('https://newsapi.org/v2/top-headlines?country=in&category=health&apiKey=90b5566f6c314946a71f7e0be8d307c4')
-                    .then((response)=>{
-                        return response.json();
-
-                    })
-                    .then((res)=>{
-                        setData(res?.articles);
-                        console.log(res.articles)
-                    })
-    }
-
-    useEffect(() =>{
-        fetchData()
-    }, [])
+    console.log("data",FitnessData)
 
     const nav = useNavigate()
 
@@ -36,28 +18,28 @@ function Fitness(){
     return(
 
       <>
-        <Logo></Logo>
-        <Navbar></Navbar>
+        <Logo />
+        <Navbar />
         <div id="Main-container">
             <div>
                 {/* Main container */}
                 <h1 className='heading'>Fitness</h1>
                 < hr className="subhr"/>
                 
-                {data.slice(1,8).map((item, index) =>{
+                {FitnessData.map((item, index) =>{
                     return(
                         <>
                             
-                            <div key={index} className="holly">
-                                <img src={item?.urlToImage} alt="" className='image2' onClick={() => handleNavigate(item.id , item)}/>
+                            <div key={item.id} className="holly">
+                                <img src={item.urlToImage} alt="" className='image2' onClick={() => handleNavigate(item.id , item)}/>
                                 <div className="holly-content">
-                                    <h3  onClick={() => handleNavigate(item.id , item)}>author: {item?.author}</h3>
+                                    <h3  onClick={() => handleNavigate(item.id , item)}>author: {item.author}</h3>
                                     
                                         <br/>
 
-                                    <p className="api-content"  onClick={() => handleNavigate(item.id , item)}>{item?.title} </p>
+                                    <p className="api-content"  onClick={() => handleNavigate(item.id , item)}>{item.title} </p>
 
-                                    <p className="Published">{item?.publishedAt}</p>
+                                    <p className='published'>{item.publishedAt}</p>
                                 </div>
                             </div>
                             
@@ -77,7 +59,9 @@ function Fitness(){
                 <h2 className='postTitle'>Catch waves with an adventure guide</h2>
                 <p id='Travel'>Travel <span id='date'> / january 14 2023</span></p>
 
-                <Posts ></Posts>   
+                <Post travel = "Travel" day = "/ january 14 2023" />
+                {/* <Posts travel = "Travel" day = "/ january 14 2023"></Posts>
+                <Posts travel = "Travel" day = "/ january 14 2023"></Posts>    */}
                 <br/> <br/> 
                 <div className='ad'><span id='ad'>Advertistement</span></div>
             </div>
@@ -87,3 +71,168 @@ function Fitness(){
 }
 
 export default Fitness
+
+
+// function Index(){
+//     // console.log("data",BollywoodData)
+
+//     const [data, setData] = useState([])
+
+//     const fetchData = () =>{
+//         return fetch('https://newsapi.org/v2/top-headlines?country=in&apiKey=90b5566f6c314946a71f7e0be8d307c4')
+//                     .then((response)=>{
+//                         return response.json();
+
+//                     })
+//                     .then((res)=>{
+//                         setData(res?.articles);
+//                         console.log(res?.articles)
+//                     })
+//     }
+//     console.log(data)
+//     useEffect(() =>{
+//         fetchData()
+//     }, [])
+
+//     const nav = useNavigate()
+
+//     const handleNavigate = (id, item) =>{
+//         nav(`/Bollywood/${id}`,{ state: {item}})
+//     }
+//     return(
+
+//       <>
+//         <Logo></Logo>
+//         <Navbar></Navbar>
+//         <div id="Main-container">
+//             <div>
+//                 {/* Main container */}
+//                 <h1 className='heading'>Bollywood</h1>
+//                 < hr className="subhr"/>
+                
+//                 {data.slice(1,7).map((item, index) =>{
+//                     return(
+//                         <>
+                            
+//                             <div key={index} className="holly">
+//                                 <img src={item.urlToImage} alt="" className='image2' onClick={() => handleNavigate(item.id , item)}/>
+//                                 <div className="holly-content">
+//                                     <h3  onClick={() => handleNavigate(item.id , item)}>author: {item?.author}</h3>
+                                    
+//                                         <br/>
+
+//                                     <p className="api-content"  onClick={() => handleNavigate(item?.id , item)}>{item?.title} </p>
+
+//                                     <p className="Published">{item?.publishedAt}</p>
+//                                 </div>
+//                             </div>
+                            
+//                             <hr className="api-hr"/>
+//                         </>
+//                     )
+//                 })}     
+//             </div>
+
+//             {/* Right container*/}
+
+//             <div id="Api-post-main">
+//                 <div className='post' id="Api-post">Top Posts</div>
+//                 <hr className='subhr' id='hr'/>
+
+//                 <div><img src={image} alt='' className='img'/></div>
+//                 <h2 className='postTitle'>Catch waves with an adventure guide</h2>
+//                 <p id='Travel'>Travel <br/><span id='date'> / january 14 2023</span></p>
+
+//                 <Posts ></Posts>
+//                 {/* <Posts travel = "Travel" day = "/ january 14 2023"></Posts>
+//                 <Posts travel = "Travel" day = "/ january 14 2023"></Posts>    */}
+//                 <br/> <br/> 
+//                 <div className='ad'><span id='ad'>Advertistement</span></div>
+//             </div>
+//        </div>
+//       </>
+//     )
+// }
+
+// export default Index
+
+
+// function Fitness(){
+    
+//     const [data, setData] = useState([])
+
+//     const fetchData = () =>{
+//         return fetch('https://newsapi.org/v2/top-headlines?country=in&category=health&apiKey=90b5566f6c314946a71f7e0be8d307c4')
+//                     .then((response)=>{
+//                         return response.json();
+
+//                     })
+//                     .then((res)=>{
+//                         setData(res?.articles);
+//                         console.log(res.articles)
+//                     })
+//     }
+
+//     useEffect(() =>{
+//         fetchData()
+//     }, [])
+
+//     const nav = useNavigate()
+
+//     const handleNavigate = (id, item) =>{
+//         nav(`/Fitness/${id}`,{ state: {item}})
+//     }
+//     return(
+
+//       <>
+//         <Logo></Logo>
+//         <Navbar></Navbar>
+//         <div id="Main-container">
+//             <div>
+//                 {/* Main container */}
+//                 <h1 className='heading'>Fitness</h1>
+//                 < hr className="subhr"/>
+                
+//                 {data.slice(1,8).map((item, index) =>{
+//                     return(
+//                         <>
+                            
+//                             <div key={index} className="holly">
+//                                 <img src={item?.urlToImage} alt="" className='image2' onClick={() => handleNavigate(item.id , item)}/>
+//                                 <div className="holly-content">
+//                                     <h3  onClick={() => handleNavigate(item.id , item)}>author: {item?.author}</h3>
+                                    
+//                                         <br/>
+
+//                                     <p className="api-content"  onClick={() => handleNavigate(item.id , item)}>{item?.title} </p>
+
+//                                     <p className="Published">{item?.publishedAt}</p>
+//                                 </div>
+//                             </div>
+                            
+//                             <hr className="api-hr"/>
+//                         </>
+//                     )
+//                 })}     
+//             </div>
+
+//             {/* Right container*/}
+
+//             <div id="Api-post-main">
+//                 <div className='post' id="Api-post">Top Posts</div>
+//                 <hr className='subhr' id='hr'/>
+
+//                 <div><img src={image} alt='' className='img'/></div>
+//                 <h2 className='postTitle'>Catch waves with an adventure guide</h2>
+//                 <p id='Travel'>Travel <span id='date'> / january 14 2023</span></p>
+
+//                 <Posts ></Posts>   
+//                 <br/> <br/> 
+//                 <div className='ad'><span id='ad'>Advertistement</span></div>
+//             </div>
+//        </div>
+//       </>
+//     )
+// }
+
+// export default Fitness
