@@ -1,18 +1,32 @@
-// imports
-
-import Navbar from "../../Components/Navbar/Navbar"
-import { Post } from "../Home/Home"
-// import BollywoodData from "./Data"
-import { useNavigate } from "react-router-dom"
-import image from '../../image/moun.jpg'
 import '../../CSS/page.css'
-import Logo from "../../Components/Logo/logo"
-// import { useState, useEffect } from "react"
-import { SciData } from "./Data"
+import { useNavigate } from "react-router-dom"
+import { Posts } from '../Home/HomeContent'
+import image from '../../image/moun.jpg'
+import Navbar from '../../Components/Navbar/Navbar'
+import Logo from '../../Components/Logo/logo'
+import { useState, useEffect } from 'react'
+
 
 
 function Science(){
-    // console.log("data",SciData)
+    
+    const [data, setData] = useState([])
+
+    const fetchData = () =>{
+        return fetch('https://blogapi-9ibr.onrender.com/science')
+                    .then((response)=>{
+                        return response.json();
+
+                    })
+                    .then((res)=>{
+                        setData(res);
+                        console.log(res)
+                    })
+    }
+
+    useEffect(() =>{
+        fetchData()
+    }, [])
 
     const nav = useNavigate()
 
@@ -22,28 +36,28 @@ function Science(){
     return(
 
       <>
-        <Logo />
-        <Navbar />
+        <Logo></Logo>
+        <Navbar></Navbar>
         <div id="Main-container">
             <div>
                 {/* Main container */}
-                <h1 className='heading'>Bollywood</h1>
+                <h1 className='heading'>Science</h1>
                 < hr className="subhr"/>
                 
-                {SciData.map((item, index) =>{
+                {data.slice(1,8).map((item, index) =>{
                     return(
                         <>
                             
-                            <div key={item.id} className="holly">
-                                <img src={item.urlToImage} alt="" className='image2' onClick={() => handleNavigate(item.id , item)}/>
+                            <div key={index} className="holly">
+                                <img src={item?.urlToImage} alt="" className='image2' onClick={() => handleNavigate(item.id , item)}/>
                                 <div className="holly-content">
-                                    <h3  onClick={() => handleNavigate(item.id , item)}>author: {item.author}</h3>
+                                    <h3  onClick={() => handleNavigate(item.id , item)}>author: {item?.author}</h3>
                                     
                                         <br/>
 
-                                    <p className="api-content"  onClick={() => handleNavigate(item.id , item)}>{item.title} </p>
+                                    <p className="api-content"  onClick={() => handleNavigate(item.id , item)}>{item?.title} </p>
 
-                                    <p className='published'>{item.publishedAt}</p>
+                                    <p className="Published">{item?.publishedAt}</p>
                                 </div>
                             </div>
                             
@@ -63,9 +77,7 @@ function Science(){
                 <h2 className='postTitle'>Catch waves with an adventure guide</h2>
                 <p id='Travel'>Travel <span id='date'> / january 14 2023</span></p>
 
-                <Post travel = "Travel" day = "/ january 14 2023" />
-                {/* <Posts travel = "Travel" day = "/ january 14 2023"></Posts>
-                <Posts travel = "Travel" day = "/ january 14 2023"></Posts>    */}
+                <Posts ></Posts>   
                 <br/> <br/> 
                 <div className='ad'><span id='ad'>Advertistement</span></div>
             </div>
@@ -75,5 +87,3 @@ function Science(){
 }
 
 export default Science
-
-
